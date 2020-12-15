@@ -51,7 +51,7 @@
 
     db="$HOME/Library/Application Support/Dock/desktoppicture.db"
     backup="$HOME/Library/Application Support/Dock/backup"
-    export version=$(system_profiler SPSoftwareDataType | awk '/System Version/ {print $4}' | cut -d . -f 1,2)
+    export version=$(system_profiler SPSoftwareDataType | awk '/System Version/ {print $4}' | cut -d . -f 1,3)
     export option_arg=$1
     option_config=options.json
 
@@ -76,7 +76,7 @@
 #
 
 # Exit with error if OS version is not 10.15 or 11.0
-    if [ $version != 10.15 ] && [ $version != 11.0 ]; then
+    if [ $version != 10 ] && [ $version != 11 ]; then
         printf "ERROR: For use with macOS Catalina 10.15.x and macOS Big Sur 11.0 only." $version
         exit 1
     fi
