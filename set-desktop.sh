@@ -53,7 +53,7 @@
     backup="$HOME/Library/Application Support/Dock/backup"
     export version=$(system_profiler SPSoftwareDataType | awk '/System Version/ {print $4}' | cut -d . -f 1,3)
     export option_arg=$1
-    option_config=options.json
+#    option_config=options.json
 
     unset additional category data_id file key lastrow name option option_data timestamp value
 
@@ -82,10 +82,10 @@
     fi
 
 # Exit with error if configuration file doesn't exist
-    if [ ! -f "$option_config" ]; then
-        printf "ERROR: Can't find configuration file '%s'.\n" "$option_config" 
-        exit 1
-    fi
+#    if [ ! -f "$option_config" ]; then
+#        printf "ERROR: Can't find configuration file '%s'.\n" "$option_config" 
+#        exit 1
+#    fi
 
 # Exit with error if no Desktop image was passed on the command line.
     if [ -z "$option_arg" ]; then
