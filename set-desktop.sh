@@ -102,24 +102,24 @@
 #       4. ...it is the name (and path) of an image file that doesn't exist
 #       5. ...it is an invalid option (as defined in the option configuration file)
 
-    if [ "$option_arg" != "default" ]; then
+    #if [ "$option_arg" != "default" ]; then
 
     # Look in the configuration file for the value of the 'option' argument that was passed to the script. 
-        option_data=$(cat "$option_config" | python -c $'from __future__ import print_function\nimport os,sys,json\ndata=json.loads(sys.stdin.read())\nfor _version in data["versions"]:\n\tif _version["version"]==os.environ["version"]:\n\t\tfor _option in _version["options"]:\n\t\t\tif _option["option"]==os.environ["option_arg"]:print(json.dumps(_option))')
-
-        if [ -z "$option_data" ]; then  # the option that was passed to the script was not found in the configuration file
-            re='\.'
-            if [[ $option_arg =~ \. ]]; then    # $option_arg contains a . denoting a filename.ext
-                if ! [ -f "$option_arg" ]; then #   4. ...the name (and path) of an image file that doesn't exist
-                    printf "ERROR: '%s' doesn't exist.\n" "$option_arg"
-                    exit 1
-                fi
-            else    #   5. ...an invalid option 
-                printf "ERROR: '%s' is not a valid option.\n" "$option_arg"
-                exit 1
-            fi
-        fi
-    fi
+    #    option_data=$(cat "$option_config" | python -c $'from __future__ import print_function\nimport os,sys,json\ndata=json.loads(sys.stdin.read())\nfor _version in data["versions"]:\n\tif _version["version"]==os.environ["version"]:\n\t\tfor _option in _version["options"]:\n\t\t\tif _option["option"]==os.environ["option_arg"]:print(json.dumps(_option))')
+    #
+    #    if [ -z "$option_data" ]; then  # the option that was passed to the script was not found in the configuration file
+    #        re='\.'
+    #        if [[ $option_arg =~ \. ]]; then    # $option_arg contains a . denoting a filename.ext
+    #            if ! [ -f "$option_arg" ]; then #   4. ...the name (and path) of an image file that doesn't exist
+    #                printf "ERROR: '%s' doesn't exist.\n" "$option_arg"
+    #                exit 1
+    #            fi
+    #        else    #   5. ...an invalid option 
+    #            printf "ERROR: '%s' is not a valid option.\n" "$option_arg"
+    #            exit 1
+    #        fi
+    #    fi
+    #fi
 
 # Exit with error if this is a dual-monitor environment (the 'displays' table will have 2 or more rows).
     if [ $(sqlite3 "$db" "SELECT COUNT() FROM displays;") -ge 2 ]; then
